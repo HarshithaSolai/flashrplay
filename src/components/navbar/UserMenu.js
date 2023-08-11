@@ -3,7 +3,7 @@ import { UserAuth } from "../../utils/context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const UserMenu = () => {
-  const { user, logOut } = UserAuth();
+  const { logOut } = UserAuth();
   const navigate = useNavigate();
 
   const handleSignOut = async () => {

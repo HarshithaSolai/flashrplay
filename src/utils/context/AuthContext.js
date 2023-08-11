@@ -2,15 +2,12 @@ import { useContext, createContext, useEffect, useState } from "react";
 import {
   GoogleAuthProvider,
   signInWithPopup,
-  signInWithRedirect,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
-import { auth, db } from "../firebase.js";
-
-import { doc, setDoc } from "firebase/firestore";
+import { auth } from "../firebase.js";
 
 import {} from "firebase/auth";
 const AuthContext = createContext();

@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { GoogleButton } from "react-google-button";
+import React, { useState } from "react";
 import { UserAuth } from "../utils/context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/images/flashlogo.png";
@@ -31,7 +30,7 @@ const SignUp = () => {
           <div className="flex justify-center items-center flex-wrap h-full g-6 text-gray-dark">
             <div className="md:w-8/12 lg:w-5/12 lg:ml-20">
               <div className="flex justify-center mb-6">
-                <img src={logo} class="w-[20%]" alt="Phone image" />
+                <img src={logo} class="w-[20%]" alt="logo" />
               </div>
               <form onSubmit={handleSignUpSubmit}>
                 <div className="mb-6">

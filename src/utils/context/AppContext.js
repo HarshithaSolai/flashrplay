@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { db } from '../firebase';
-import { getDocs, getDoc, collection, doc, where, updateDoc, increment } from 'firebase/firestore';
+import { getDocs, getDoc, collection, doc, updateDoc } from 'firebase/firestore';
 import { UserAuth } from './AuthContext'; // Import the AuthContext
 
 const AppContext = createContext();
@@ -76,12 +76,10 @@ const incrementCompletedTimes = async (flashCardCollectionId) => {
   };
 
   useEffect(() => {
-    
-
-
     fetchUserData();
     fetchSettings();
-  }, [user]); // Include user as a dependency
+    // eslint-disable-next-line
+  }, [user]); 
 
   return (
     <AppContext.Provider value={{ userData, setUserData, settings, incrementCompletedTimes }}>

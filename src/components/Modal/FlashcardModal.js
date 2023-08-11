@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useAppContext } from '../../utils/context/AppContext'; // Import the AppContext
 
 const FlashcardModal = ({ cards, onClose }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
