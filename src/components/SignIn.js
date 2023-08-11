@@ -52,7 +52,7 @@ const SignIn = () => {
           <div className="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
             <div className="md:w-8/12 lg:w-5/12 lg:ml-20">
               <div className="flex justify-center mb-6">
-                <img src={logo} className="w-[20%]" alt="logo" />
+                <img src={logo} className="w-[40%]" alt="logo" />
               </div>
               <form onSubmit={handleSubmit}>
                 <div className="mb-6">
@@ -78,7 +78,7 @@ const SignIn = () => {
 
                 <button
                   type="submit"
-                  className="inline-block px-7 py-3 bg-purple-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-yellow hover:shadow-lg focus:bg-yellow focus:shadow-lg focus:outline-none focus:ring-0 active:bg-yellow active:shadow-lg transition duration-150 ease-in-out w-full"
+                  className="inline-block px-7 py-3 bg-purple-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-700 active:shadow-lg transition duration-150 ease-in-out w-full"
                   data-mdb-ripple="true"
                   data-mdb-ripple-color="light"
                 >
