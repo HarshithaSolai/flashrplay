@@ -1,38 +1,76 @@
-.App {
-  text-align: center;
-}
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+.card-grid{
+  display: grid;
   align-items: center;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.card{
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  position: relative;
+  border-radius: .25rem;
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, .3);
+  background-color: white;
+  transform-style: preserve-3d;
+  height: 150px;
+  cursor: pointer;
+  transition: 150ms;
+  transform: perspective(1000px) rotateY(var(--rotate-y, 0))
 }
 
-.App-link {
-  color: #61dafb;
+.card-modal {
+  width : 70%;
+  height : 70%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.card:hover{
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.5);
+}
+
+.card.flip{
+  --rotate-y: 180deg;
+}
+
+.card .front, .card .back{
+  position: absolute;
+  padding: 1rem;
+  backface-visibility: hidden;
+}
+
+.card .front {
+  font-size: 60px;
+}
+
+.card .back {
+  transform: rotateY(180deg);
+  font-size: 12px;
+  width : 80%;
+  overflow-y: scroll;
+}
+
+.card .back .summary {
+  font-size: 30px;
+  max-height: 150px; 
+  overflow-y: auto;
+
+}
+
+.additional {
+  display : flex;
+  flex-direction: column;
+  gap : 10px;
+  flex-wrap: wrap;
+}
+
+@media only screen and (max-width: 600px) {
+  .card .back .summary {
+    font-size: 16px;
   }
-  to {
-    transform: rotate(360deg);
+  .card .front {
+    font-size: 20px;
   }
 }
