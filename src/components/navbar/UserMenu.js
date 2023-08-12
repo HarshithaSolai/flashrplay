@@ -22,22 +22,13 @@ const UserMenu = () => {
     }
   };
 
-  let name;
-  if (user) {
-    if (user.displayName != null) {
-      name = user.displayName;
-    } else {
-      name = user.email.substring(0, user.email.indexOf('@'));
-    }
-  }
-
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3 hover:cursor-pointer text-green-700"
         onClick={toggleOpen}>
         <Avatar />
         <div className="flex flex-col">
-          <span className="text-md text-blue font-bold ">{name.toUpperCase()}</span>
+          <span className="text-md text-blue font-bold ">{user?.email?.substring(0, user?.email.indexOf('@')).toUpperCase()}</span>
           <span className="text-sm text-purple">{user.email}</span>
         </div>
       </div>
