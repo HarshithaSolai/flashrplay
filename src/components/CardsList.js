@@ -22,6 +22,7 @@ const CardsList = () => {
       setFlashCard(data[0]);
       setIsModalOpen(true);
     } catch (error) {
+      bugfender.sendIssue("fetching flash card collection", error )
       console.error("Error fetching data:", error);
     }
   };
@@ -52,7 +53,6 @@ const CardsList = () => {
     const collectionId = card.id; // Assuming card.id corresponds to flashCardCollection ID
     const collectionData = userData[collectionId];
 
-    console.log(collectionData);
     if (!collectionData) {
       return "todo"; // Assuming new collections are always "todo"
     }
