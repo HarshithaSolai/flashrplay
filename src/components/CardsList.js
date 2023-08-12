@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useAppContext } from "../utils/context/AppContext"; // Update the path accordingly
 import { db } from "../utils/firebase";
 import { getDocs, collection, query, where } from "firebase/firestore";
-import FlashcardModal from "./modal/FlashcardModal";
+import FlashcardModal from "./Modal/FlashcardModal";
 import bugfender from "../utils/bugfender";
 
 const CardsList = () => {
