@@ -4,15 +4,15 @@ import { db } from "../utils/firebase";
 import { getDocs, collection, query, where } from "firebase/firestore";
 import FlashcardModal from "../components/Modal/FlashcardModal";
 import bugfender from "../utils/bugfender";
+import { UserAuth } from '../utils/context/AuthContext'; // Import the AuthContext
 
 const CardsList = () => {
-  const { userData, settings } = useAppContext();
+  const { userData, settings, setUserData } = useAppContext();
   const [flashCardCollection, setFlashCardCollection] = useState([]);
   const [flashCard, setFlashCard] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const { user } = UserAuth(); 
   const openModal = async (flashCardCollectionId) => {
-    bugfender.log("Modal opened");
     try {
       const q = query(
         collection(db, "flashCard"),
@@ -53,16 +53,13 @@ const CardsList = () => {
     const collectionId = card.id; // Assuming card.id corresponds to flashCardCollection ID
     const collectionData = userData[collectionId];
 
+    console.log(collectionData);
     if (!collectionData) {
       return "todo"; // Assuming new collections are always "todo"
     }
 
-    if (collectionData.completedTimes === 0) {
-      return "todo";
-    } else if (
-      collectionData.completedTimes < settings.maxTimes ||
-      collectionData.completedDays < settings.maxDays
-    ) {
+    if (
+      collectionData.completedTimes < settings.maxTimes ) {
       return "in progress";
     } else {
       return "done";
@@ -95,7 +92,8 @@ const CardsList = () => {
               className="card-item text-center bg-pink-200 p-2 rounded cursor-pointer mb-2 w-full shadow"
             >
               <p>{card.name}</p>
-                    </div>
+              <p>Count Status : 0 of {settings.maxTimes} </p>
+            </div>
           ))}
         </div>
 
@@ -110,7 +108,8 @@ const CardsList = () => {
               onClick={() => openModal(card.id)}
               className="card-item bg-green-300 p-2 rounded cursor-pointer mb-2"
             >
-              <span>{card.name}</span>
+              <p>{card.name}</p>
+              <p>Count Status : {userData[card.id]?.completedTimes} of {settings.maxTimes} </p>
                   </div>
           ))}
         </div>
@@ -124,9 +123,8 @@ const CardsList = () => {
               onClick={() => openModal(card.id)}
               className="card-item bg-blue-300 p-2 rounded cursor-pointer mb-2"
             >
-              <span>{card.name}</span>
-              <p>Day's Status : {userData[card.id].completedDays} of {settings.maxDays} </p>
-              <p>Count Status : {userData[card.id].completedTimes} of {settings.maxTimes} </p>
+              <p>{card.name}</p>
+              <p>Count Status : {userData[card.id]?.completedTimes} of {settings.maxTimes} </p>
             </div>
           ))}
         </div>

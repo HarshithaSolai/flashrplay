@@ -12,57 +12,27 @@ export const AppContextProvider = ({ children }) => {
   const [userData, setUserData] = useState({});
   const [settings, setSettings] = useState({});
 
-const incrementCompletedTimes = async (flashCardCollectionId) => {
-  try {
-    if (user) {
-      const userRef = doc(db, 'userData', user.uid); 
-      const userDoc = await getDoc(userRef);
-      
-      if (userDoc.exists()) {
-        const userData = userDoc.data();
-        
-        if (userData[flashCardCollectionId]) {
-          // Increment the completedTimes for the specific flashCardCollectionId
-          userData[flashCardCollectionId].completedTimes += 1;
 
-          // Update the user data with the modified userData
-          await updateDoc(userRef, userData);
-
-          // Refresh the user data after updating
-          fetchUserData();
-        } else {
-          console.log('flashCardCollectionId not found in userData');
-        }
-      } else {
-        console.log('User document does not exist');
-      }
-    } else {
-      console.log('User is not authenticated');
-    }
-  } catch (error) {
-    console.error('Error incrementing completedTimes:', error);
-  }
-};
-
-
-  const fetchUserData = async () => {
-    if (user) {
+  const fetchUserData = async (userId) => {
+    if (userId) {
       try {
-        const userDataSnapshot = await getDocs(collection(db, 'userData'));
-        const userData = {};
+        const userDocRef = doc(db, 'userData', userId);
+        const userDocSnapshot = await getDoc(userDocRef);
   
-        userDataSnapshot.forEach((doc) => {
-          userData[doc.id] = doc.data();
-        });
-  
-        setUserData(userData);
+        if (userDocSnapshot.exists()) {
+          const userCollections = userDocSnapshot.data();
+          setUserData(userCollections);
+        } else {
+          console.log('User data not found for userId:', userId);
+        }
       } catch (error) {
         console.error('Error fetching user data:', error);
       }
     } else {
-      console.log('User is not authenticated');
+      setUserData({});
     }
   };
+  
 
 
   const fetchSettings = async () => {
@@ -76,13 +46,17 @@ const incrementCompletedTimes = async (flashCardCollectionId) => {
   };
 
   useEffect(() => {
-    fetchUserData();
     fetchSettings();
     // eslint-disable-next-line
-  }, [user]); 
+  }, []); 
+
+  useEffect(() => {
+    fetchUserData(user ? user.uid : null);
+    // eslint-disable-next-line
+  }, [user]);
 
   return (
-    <AppContext.Provider value={{ userData, setUserData, settings, incrementCompletedTimes }}>
+    <AppContext.Provider value={{ userData, setUserData, settings }}>
       {children}
     </AppContext.Provider>
   );

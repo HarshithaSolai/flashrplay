@@ -8,31 +8,48 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import { auth } from "../firebase.js";
+import { db } from '../firebase';
+import { getDoc, doc, setDoc } from 'firebase/firestore';
+import { useAppContext } from './AppContext'; // Import useAppContext
 
-import {} from "firebase/auth";
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
+  
+  const signUp = async (email, password) => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+  
+      // Create a document in the userData collection for the new user
+      const userDataRef = doc(db, 'userData', userCredential.user.uid);
+      await setDoc(userDataRef, {});
 
-  const signUp = (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password);
+      return userCredential;
+    } catch (error) {
+      throw error;
+    }
   };
-
-  const signIn = (email, password) => {
-    return signInWithEmailAndPassword(auth, email, password);
+  
+  const signIn = async (email, password) => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+  
+      return userCredential;
+    } catch (error) {
+      throw error;
+    }
   };
-
+  
   const googleSignIn = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider);
-    //signInWithRedirect(auth, provider);
   };
-
+  
   const logOut = () => {
     signOut(auth);
   };
-
+  
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       console.log("currentUser:", currentUser);
@@ -43,6 +60,8 @@ export const AuthContextProvider = ({ children }) => {
       unsubscribe();
     };
   }, []);
+
+  // ...
 
   return (
     <AuthContext.Provider

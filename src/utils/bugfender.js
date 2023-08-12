@@ -1,6 +1,5 @@
 import { Bugfender } from '@bugfender/sdk'
 
-console.log(process.env.REACT_APP_BUGFENDER_API_KEY)
 const bugfender = {
     init: () => {
         Bugfender.init({

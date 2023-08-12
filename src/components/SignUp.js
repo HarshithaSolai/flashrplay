@@ -30,7 +30,7 @@ const SignUp = () => {
           <div className="flex justify-center items-center flex-wrap h-full g-6 text-gray-dark">
             <div className="md:w-8/12 lg:w-5/12 lg:ml-20">
               <div className="flex justify-center mb-6">
-                <img src={logo} class="w-[40%]" alt="logo" />
+                <img src={logo} className="w-[40%]" alt="logo" />
               </div>
               <form onSubmit={handleSignUpSubmit}>
                 <div className="mb-6">
