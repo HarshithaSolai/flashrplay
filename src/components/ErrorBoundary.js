@@ -12,7 +12,7 @@ export class ErrorBoundary extends React.Component {
 
   render() {
     if (this.state.hasError) {
-      return <h2 className="text-2xl text-abnamro-green">
+      return <h2 className="text-2xl">
         Something went wrong. Please try again later.
       </h2>;
     }

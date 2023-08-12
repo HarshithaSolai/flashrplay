@@ -3,13 +3,11 @@ import { BrowserRouter, Route, Routes, Navigate, Outlet } from "react-router-dom
 
 import './App.css'
 import Navbar from "./components/navbar/Navbar";
-import SignIn from "./components/SignIn";
-import SignUp from "./components/SignUp";
+import SignIn from "./components/login/SignIn";
+import SignUp from "./components/login/SignUp";
 import { AuthContextProvider, UserAuth } from "./utils/context/AuthContext";
 import { AppContextProvider} from './utils/context/AppContext';
-
 import { ErrorBoundary } from "./components/ErrorBoundary";
-
 import CardsList from "./components/CardsList"; // Move the import here
 
 function App() {
@@ -36,7 +34,7 @@ function App() {
 }
 
 const ProtectedLayout = () => {
-  const { user } = UserAuth(); // Use the UserAuth hook
+  const { user } = UserAuth(); 
 
   if (!user) {
     return <Navigate to="/signin" />;

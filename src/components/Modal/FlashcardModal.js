@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useAppContext } from '../../utils/context/AppContext'; // Import the AppContext
-import { doc, updateDoc } from 'firebase/firestore'; // Import Firestore updateDoc
+import { useAppContext } from '../../utils/context/AppContext';
+import { UserAuth } from '../../utils/context/AuthContext';
+import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../utils/firebase';
-import { UserAuth } from '../../utils/context/AuthContext'; // Import the AuthContext
-
 
 const FlashcardModal = ({ flashCardCollectionId, cards, onClose }) => {
   const { userData, setUserData, settings } = useAppContext();
+  const { user } = UserAuth(); 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [hasMounted, setHasMounted] = useState(false);
-  const { user } = UserAuth(); // Use the AuthContext to get the authenticated user
-
+  
   useEffect(() => {
     let interval;
 
@@ -20,7 +19,6 @@ const FlashcardModal = ({ flashCardCollectionId, cards, onClose }) => {
         setCurrentIndex(currentIndex + 1);
       }, settings.speed * 1000); // Convert speed to milliseconds
     } else if (currentIndex === cards.length - 1 && isPlaying) {
-      // Update completedTimes for the specific flashCardCollectionId in userData
       const updatedUserData = { ...userData };
       if (!updatedUserData[flashCardCollectionId]) {
         updatedUserData[flashCardCollectionId] = {
@@ -38,6 +36,7 @@ const FlashcardModal = ({ flashCardCollectionId, cards, onClose }) => {
     }
 
     return () => clearInterval(interval);
+  // eslint-disable-next-line
   }, [isPlaying, currentIndex]);
 
   const togglePlay = () => {
@@ -58,6 +57,7 @@ const FlashcardModal = ({ flashCardCollectionId, cards, onClose }) => {
 
       speechSynthesis.speak(speech);
     }
+    // eslint-disable-next-line
   }, [isPlaying, hasMounted, currentIndex, cards, settings]);
 
   useEffect(() => {
