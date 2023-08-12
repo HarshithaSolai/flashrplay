@@ -8,14 +8,15 @@ import {getFirestore} from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyC1eIhGhS20aNHf51eaGYRU4PmC1-tkS0g",
-  authDomain: "flash-r-play.firebaseapp.com",
-  projectId: "flash-r-play",
-  storageBucket: "flash-r-play.appspot.com",
-  messagingSenderId: "1089907838599",
-  appId: "1:1089907838599:web:86a78dbc80fb6562c23222",
-  measurementId: "G-8424D0T28R"
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 };
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

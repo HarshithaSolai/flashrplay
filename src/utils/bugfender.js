@@ -1,9 +1,10 @@
 import { Bugfender } from '@bugfender/sdk'
 
+console.log(process.env.REACT_APP_BUGFENDER_API_KEY)
 const bugfender = {
     init: () => {
         Bugfender.init({
-            appKey: 'IIYthymBh5f2WLyPoJnEHCVTZig7hLFb',
+            appKey: process.env.REACT_APP_BUGFENDER_API_KEY,
         })
     },
 
