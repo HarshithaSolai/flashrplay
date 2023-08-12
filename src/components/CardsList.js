@@ -115,7 +115,7 @@ const CardsList = () => {
               className="card-item bg-yellow-300 p-2 rounded cursor-pointer mb-2 text-center"
             >
               <p>{card.name}</p>
-              <p>Count Status : {userData[card.id]?.completedTimes} times viewed </p>
+              <p>{userData[card.id]?.completedTimes} times viewed </p>
                   </div>
           ))}
         </div>
@@ -130,7 +130,7 @@ const CardsList = () => {
               className="card-item bg-green p-2 rounded cursor-pointer mb-2 text-center"
             >
               <p>{card.name}</p>
-              <p>Count Status : {userData[card.id]?.completedTimes} times viewed  </p>
+              <p>{userData[card.id]?.completedTimes} times viewed  </p>
             </div>
           ))}
         </div>
