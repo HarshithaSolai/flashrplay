@@ -1,12 +1,67 @@
-# Getting Started with Create React App
+# Flash-R-Play 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Objective : 
+  An innovative React application designed to elevate early childhood education inspired by Glenn Domans Right Brain Education method using Flashcards. This interactive platform is tailored to engage young learners through visually stimulating flashcards covering a diverse range of subjects. With the aim of improving photographic memory and cognitive development, Flash-R-Play presents these cards sequentially at a standard speed recommended by RBE method. Moreover, I am planning to implement interesting features like speed customization, goals tracking, integration of Web Speech API to convert displayed flashcards text to audio and many more... This user-friendly application reimagines the traditional RBE experience, where parents previously had to physically flash each set of cards at regular intervals while vocalizing the content aloud.
 
-## Available Scripts
+## Table of contents:
+- [Requirement Analysis](#requirement-analysis)
+- [Tech Stack](#tech-stack)
+- [Design](#design)
+- [Live Demo](#live-demo)
+- [Running Scripts](#running-scripts)
+- [Other Links](#other-links)
 
-In the project directory, you can run:
+## Requirement Analysis
+### Functional Requirments
+- Signin/Signup for parents with username and password
+- In landing page, display header with logo, user info and menu to logout.
+- Below header, show a container with three columns like todo, in progress and done. Fetch the details from firebase. Initially all the flashcards are in todo, it is done by checking the completedTimes in userData fetched from firebase (if completedTimes < maxTimes and not equal to 0), then its in todo state, if they are equal or more then in done, else in progress. 
+- Once a set of flashcards are flashed, that set is moved to in progress state. 
+- On click of any button in any column, it takes to flashcard page, where the set of flashcards are displayed one after another each is flashed for one second. Below the flashcard container, play/ pause button and close button
+- Fetch these data also from firebase. 
+- The text showed in the flashcard must be converted to speech, using Web Speech API.
+- Once the flashcard set is over, the db is updated with the completedTimes for that set.
+- maxTimes, voiceType (male or female), speed (1, 2) in  settings of firebase
 
-### `yarn start`
+### Not Implemented (Future Scope)
+- Goal tracking (strike)
+- Option to edit the settings (voiceType/ spped/maxTimes) by users 
+- More data for flashcards
+## Tech Stack
+- **UI Framework** :  React
+
+- **Routing** : React Router DOM
+
+- **CSS Framework** : Tailwind CSS (Tailwind automatically removes all unused CSS when building for production, responsive design with breakpoints, don't have to spend time on writing long css in css files, reusable classes)
+
+- **Data/State Management** : React in-built techniques like Props drilling, lifting up state and Context API for sharing data (props) between components. I would have used **Redux** as state management library for complex application. Since this app does not have complex data to be globally stored, I did not use any framework for state management to have minimum scaffholding. 
+
+- **Authentication and Database** : Firebase (Firebase Authentication, Firestore)
+
+- **Cloud Storage** : Firebase Cloud Storage
+
+- **Logging** :  Bugfender
+
+- **Hosting** : Netlify
+
+## Design
+### UX
+- Colors and Fonts suitable for kids 
+- Simple UI with only required info and easy for parents to handle 
+- Responsive design : Works in all devices and screen sizes.
+
+## Live Demo
+Please check https://flashrplay.netlify.app/ for live demo.
+If you want to run the app in local, please check next section.
+
+## Running Scripts
+After cloning the project, you can run the following in the project directory.
+
+### `yarn install or npm install`
+
+Installs the required packages.
+
+### `yarn start or npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
@@ -14,12 +69,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
+### `yarn build or npm build`
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
@@ -27,44 +77,11 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Other Links
 
-### `yarn eject`
+- [Blog Post](https://harshithasv.hashnode.dev/elevating-early-childhood-education-with-flash-r-play)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- [Bugfender](https://dashboard.bugfender.com/3/app/DXtETPbMAq/logs)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- [Hack-R-Play 2.0](https://hustles.reactplay.io/events/23/hackrplay)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

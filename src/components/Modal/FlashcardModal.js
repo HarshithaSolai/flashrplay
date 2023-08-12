@@ -46,20 +46,28 @@ const FlashcardModal = ({ flashCardCollectionId, cards, onClose }) => {
   useEffect(() => {
     if (isPlaying && hasMounted && currentIndex < cards.length) {
       const speech = new SpeechSynthesisUtterance(cards[currentIndex].name);
-
+  
       // Set the speech synthesis options, like voice type
-      const voices = speechSynthesis.getVoices();
+      let voices = speechSynthesis.getVoices();
       const selectedVoiceType = settings.voiceType;
       const selectedVoice = voices.find(voice => voice.name.includes(selectedVoiceType));
       if (selectedVoice) {
         speech.voice = selectedVoice;
+        speechSynthesis.speak(speech);
+      } else {
+        // Wait for voices to be loaded
+        speechSynthesis.addEventListener('voiceschanged', () => {
+          voices = speechSynthesis.getVoices();
+          const updatedSelectedVoice = voices.find(voice => voice.name.includes(selectedVoiceType));
+          if (updatedSelectedVoice) {
+            speech.voice = updatedSelectedVoice;
+            speechSynthesis.speak(speech);
+          }
+        });
       }
-
-      speechSynthesis.speak(speech);
     }
-    // eslint-disable-next-line
   }, [isPlaying, hasMounted, currentIndex, cards, settings]);
-
+  
   useEffect(() => {
     setHasMounted(true);
   }, []);

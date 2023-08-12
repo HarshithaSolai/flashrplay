@@ -16,7 +16,7 @@ const SignUp = () => {
     setError("");
     try {
       const result = await signUp(email, password);
-      bugfender.log("created:", result);
+      bugfender.log("user creacted");
       navigate("/");
     } catch (e) {
       setError(e.message);

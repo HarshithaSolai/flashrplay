@@ -48,6 +48,13 @@ const CardsList = () => {
     fetchData();
   }, []);
 
+  if (!userData || !settings) {
+    console.log("loading...", settings)
+    // Data is still being fetched, show loading or placeholder
+    return <div>Loading...</div>;
+  }
+
+
   // Determine card status based on userData and settings
   const getCardStatus = (card) => {
     const collectionId = card.id; // Assuming card.id corresponds to flashCardCollection ID
@@ -82,7 +89,7 @@ const CardsList = () => {
         {/* Column for "Todo" cards */}
         <div className="flex flex-col bg-white rounded p-4 w-[350px] shadow">
           <h2 className="text-2xl font-semibold mb-2 text-pink-500 text-center">
-            TODO
+            TODO 
           </h2>
           {todoCards.map((card) => (
             <div
@@ -91,7 +98,7 @@ const CardsList = () => {
               className="card-item text-center bg-pink-200 p-2 rounded cursor-pointer mb-2 w-full shadow"
             >
               <p>{card.name}</p>
-              <p>Count Status : 0 of {settings.maxTimes} </p>
+              <p> 0 times viewed </p>
             </div>
           ))}
         </div>
@@ -108,7 +115,7 @@ const CardsList = () => {
               className="card-item bg-yellow-300 p-2 rounded cursor-pointer mb-2 text-center"
             >
               <p>{card.name}</p>
-              <p>Count Status : {userData[card.id]?.completedTimes} of {settings.maxTimes} </p>
+              <p>Count Status : {userData[card.id]?.completedTimes} times viewed </p>
                   </div>
           ))}
         </div>
@@ -123,7 +130,7 @@ const CardsList = () => {
               className="card-item bg-green p-2 rounded cursor-pointer mb-2 text-center"
             >
               <p>{card.name}</p>
-              <p>Count Status : {userData[card.id]?.completedTimes} of {settings.maxTimes} </p>
+              <p>Count Status : {userData[card.id]?.completedTimes} times viewed  </p>
             </div>
           ))}
         </div>

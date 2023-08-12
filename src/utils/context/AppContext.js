@@ -9,8 +9,8 @@ export const useAppContext = () => useContext(AppContext);
 
 export const AppContextProvider = ({ children }) => {
   const { user } = UserAuth(); // Use the AuthContext to get the authenticated user
-  const [userData, setUserData] = useState({});
-  const [settings, setSettings] = useState({});
+  const [userData, setUserData] = useState(null);
+  const [settings, setSettings] = useState(null);
 
 
   const fetchUserData = async (userId) => {
