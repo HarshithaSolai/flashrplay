@@ -22,16 +22,28 @@ const UserMenu = () => {
     }
   };
 
+  let name;
+  if (user) {
+    if (user.displayName != null) {
+      name = user.displayName;
+    } else {
+      name = user.email.substring(0, user.email.indexOf('@'));
+    }
+  }
+
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3 hover:cursor-pointer text-green-700"
         onClick={toggleOpen}>
         <Avatar />
-        <div>{user.displayName || user.email}</div>
+        <div className="flex flex-col">
+          <span className="text-md text-blue font-bold ">{name.toUpperCase()}</span>
+          <span className="text-sm text-purple">{user.email}</span>
+        </div>
       </div>
 
       {isOpen && (
-        <div className="absolute shadow-md w-[40vw] md:w-full bg-green-100 overflow-hidden right-0 top-14 text-sm p-6 ">
+        <div className="absolute shadow-md w-[40vw] md:w-full bg-white overflow-hidden right-0 top-14 text-sm p-6 ">
           <div className="flex flex-col cursor-pointer gap-3 ">
             <div onClick={() => {}}> Settings</div>
             <div onClick={handleSignOut}>Log out</div>

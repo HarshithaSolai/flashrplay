@@ -73,7 +73,7 @@ const FlashcardModal = ({ flashCardCollectionId, cards, onClose }) => {
         <div className='flex flex-row justify-center gap-4'>
           <button
             onClick={togglePlay}
-            className="mr-2 bg-green-500 text-white rounded-md px-4 py-2"
+            className="mr-2 bg-green text-white rounded-md px-4 py-2"
           >
             {isPlaying ? 'Pause' : 'Play'}
           </button>

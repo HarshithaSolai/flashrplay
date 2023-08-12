@@ -98,14 +98,14 @@ const CardsList = () => {
 
         {/* Column for "In Progress" cards */}
         <div className="flex flex-col bg-white rounded p-4 w-[350px] shadow">
-          <h2 className="text-2xl font-semibold mb-2 text-center text-yellow-400">
+          <h2 className="text-2xl font-semibold mb-2 text-center text-yellow-500">
             IN PROGRESS
           </h2>
           {inProgressCards.map((card) => (
             <div
               key={card.id}
               onClick={() => openModal(card.id)}
-              className="card-item bg-green-300 p-2 rounded cursor-pointer mb-2"
+              className="card-item bg-yellow-300 p-2 rounded cursor-pointer mb-2 text-center"
             >
               <p>{card.name}</p>
               <p>Count Status : {userData[card.id]?.completedTimes} of {settings.maxTimes} </p>
@@ -115,12 +115,12 @@ const CardsList = () => {
 
         {/* Column for "Done" cards */}
         <div className="flex flex-col bg-white rounded p-4 w-[350px] shadow">
-          <h2 className="text-2xl font-semibold mb-2 text-center text-purple-600">DONE</h2>
+          <h2 className="text-2xl font-semibold mb-2 text-center text-green">DONE</h2>
           {doneCards.map((card) => (
             <div
               key={card.id}
               onClick={() => openModal(card.id)}
-              className="card-item bg-blue-300 p-2 rounded cursor-pointer mb-2"
+              className="card-item bg-green p-2 rounded cursor-pointer mb-2 text-center"
             >
               <p>{card.name}</p>
               <p>Count Status : {userData[card.id]?.completedTimes} of {settings.maxTimes} </p>
